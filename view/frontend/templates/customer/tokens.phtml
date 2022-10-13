@@ -1,0 +1,108 @@
+<?php
+/**
+ * Copyright © Ihor Oleksiienko (https://github.com/torys877)
+ * See LICENSE for license details.
+ */
+use Crypto\MagentoToken\Block\Customer\Tokens;
+use Crypto\MagentoToken\Api\Data\WithdrawRequestInterface;
+
+/**
+ * @var $block Tokens
+ */
+
+$requests = $block->getWithdrawRequests();
+
+?>
+<div class="message" style="display: none"></div>
+<div class="token_balance_amount">
+    <p><b><?= $block->escapeHtml(__('Total Tokens'));?></b></p>
+    <b><?= $block->getTokenBalanceAmount()?></b>
+</div>
+<div id="claimscope" data-bind="scope: 'cryptotokenscope'">
+    <label for="request_amount" class="admin__field-label">
+        <span><?= $block->escapeHtml(__('Request Amount')) ?></span>
+    </label>
+    <input id="request_amount" type="text" name="request_amount" value="" style="width:100px" />
+    <a
+        id="claimbutton"
+        class="order-status"
+        style="background-color: #1979c3;color: white; margin-top:0px;"
+        href="<?= $block->getUrl('cryptotoken/customer/claimRequest') ?>"
+        data-bind="click: claimRequest"
+        data-customdat="sdfsdf"
+    >
+        <?=__('Claim Request')?>
+    </a>
+    <?php if (!empty($requests)):?>
+    <table>
+        <tr>
+            <td><?= __('ID')?></td>
+            <td><?= __('Amount')?></td>
+            <td><?= __('Status')?></td>
+            <td><?= __('Created At')?></td>
+            <td><?= __('Updated At')?></td>
+            <td><?= __('Action')?></td>
+        </tr>
+        <?php foreach ($requests as $request):
+            /** @var WithdrawRequestInterface $request  */
+        ?>
+        <tr>
+            <td><?= $request->getRequestId() ?></td>
+            <td><?= $request->getAmount() ?></td>
+            <td><?= $block->getRequestStatusText((int) $request->getStatus())?></td>
+            <td><?= $request->getCreatedAt() ?></td>
+            <td><?= $request->getUpdatedAt() ?></td>
+            <td>
+                <?php if ($request->getStatus() == WithdrawRequestInterface::STATUS_APPROVED): ?>
+                    <a
+                        id="claim_token_<?= $request->getRequestId()?>"
+                        class="order-status"
+                        style="background-color: #1979c3;color: white; margin-top:0px;"
+                        href="<?= $block->getUrl('cryptotoken/customer/claimToken') ?>"
+                        data-bind="click: claimTokens"
+                        data-nonce="<?= $request->getNonce()?>"
+                        data-requestid="<?= $request->getRequestId()?>"
+                        data-messagehash="<?= $request->getMessageHash()?>"
+                        data-createdat="<?= $request->getCreatedAt()?>"
+                        data-amount="<?= $request->getAmount()?>"
+                        data-signature="<?= $request->getSignedMessage()?>"
+                    >
+                        <?=__('Claim Tokens')?>
+                    </a>
+                <?php elseif($request->getStatus() == WithdrawRequestInterface::STATUS_REJECTED):?>
+                    <b><?= __('Rejected')?></b>
+                <?php elseif($request->getStatus() == WithdrawRequestInterface::STATUS_NEW):?>
+                    <b><?= __('New')?></b>
+                <?php elseif($request->getStatus() == WithdrawRequestInterface::STATUS_CLAIMED):?>
+                    <b><?= __('Claimed')?></b>
+                <?php endif;?>
+            </td>
+        </tr>
+        <?php endforeach;?>
+
+    </table>
+    <?php endif;?>
+
+</div>
+<?php
+$claimUrl = $block->getUrl('cryptotoken/customer/claimRequest');
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "cryptotokenscope": {
+                        "component": "Crypto_MagentoToken/js/customer/web3component",
+                        "claimRequestUrl": "<?= $block->getUrl('cryptotoken/customer/claimRequest') ?>",
+                        "claimTokensUrl": "<?= $block->getUrl('cryptotoken/customer/claimTokens') ?>",
+                        "contractAddress": "<?= $block->getTokenHelper()->getContractAddress() ?>",
+                        "contractAbi": "<?= $escaper->escapeJs($block->getTokenHelper()->getContractAbi()) ?>",
+                        "tokenAddress": "<?= $block->getTokenHelper()->getTokenAddress() ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>

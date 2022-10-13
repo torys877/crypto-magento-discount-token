@@ -1,0 +1,25 @@
+{
+    "name": "cryptom2/magento-discount-token",
+    "version": "v1.0.0",
+    "description": "Magento 2 ERC20 token discount extension",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Ihor Oleksiienko",
+            "homepage": "https://github.com/torys877",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "cryptom2/base": "v1.0.1"
+    },
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Crypto\\MagentoToken\\": ""
+        }
+    }
+}

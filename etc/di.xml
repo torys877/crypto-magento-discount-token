@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ihor Oleksiienko (https://github.com/torys877)
+ * See LICENSE for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Crypto\MagentoToken\Api\Data\TokenBalanceInterface"
+                type="Crypto\MagentoToken\Model\Data\TokenBalance"/>
+    <preference for="Crypto\MagentoToken\Api\Data\TokenBalanceHistoryInterface"
+                type="Crypto\MagentoToken\Model\Data\TokenBalanceHistory"/>
+    <preference for="Crypto\MagentoToken\Api\Data\WithdrawRequestInterface"
+                type="Crypto\MagentoToken\Model\Data\WithdrawRequest"/>
+    <preference for="Crypto\MagentoToken\Api\Data\TokenOrderInterface"
+                type="Crypto\MagentoToken\Model\Data\TokenOrder"/>
+
+    <preference for="Crypto\MagentoToken\Api\TokenBalanceRepositoryInterface"
+                type="Crypto\MagentoToken\Model\TokenBalanceRepository"/>
+    <preference for="Crypto\MagentoToken\Api\TokenHistoryRepositoryInterface"
+                type="Crypto\MagentoToken\Model\TokenHistoryRepository"/>
+    <preference for="Crypto\MagentoToken\Api\TokenOrderRepositoryInterface"
+                type="Crypto\MagentoToken\Model\TokenOrderRepository"/>
+    <preference for="Crypto\MagentoToken\Api\WithdrawRequestRepositoryInterface"
+                type="Crypto\MagentoToken\Model\WithdrawRequestRepository"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="magentotoken_listing_data_source" xsi:type="string">
+                    Crypto\MagentoToken\Model\ResourceModel\Tokenbalance\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Crypto\MagentoToken\Model\ResourceModel\Tokenbalance\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">cryptom2_token_balance</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="tokenhistory_listing_data_source" xsi:type="string">
+                    Crypto\MagentoToken\Model\ResourceModel\Tokenhistory\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Crypto\MagentoToken\Model\ResourceModel\Tokenhistory\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">cryptom2_token_balance_history</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="tokenorder_listing_data_source" xsi:type="string">
+                    Crypto\MagentoToken\Model\ResourceModel\Tokenorder\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Crypto\MagentoToken\Model\ResourceModel\Tokenorder\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">cryptom2_token_order</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="withdrawrequest_listing_data_source" xsi:type="string">
+                    Crypto\MagentoToken\Model\ResourceModel\Withdrawrequest\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Crypto\MagentoToken\Model\ResourceModel\Withdrawrequest\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">cryptom2_token_withdraw_request</argument>
+        </arguments>
+    </virtualType>
+</config>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Ihor Oleksiienko (https://github.com/torys877)
+ * See LICENSE for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">tokenbalance_form.tokenbalance_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Crypto\MagentoToken\Ui\Form\Button\Save"/>
+            <button name="delete" class="Crypto\MagentoToken\Ui\Form\Button\Delete"/>
+            <button name="back">
+                <label translate="true">Back</label>
+                <class>back</class>
+                <url path="*/*"/>
+            </button>
+        </buttons>
+        <namespace>tokenbalance_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>tokenbalance_form.tokenbalance_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="tokenbalance_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="Crypto\MagentoToken\Ui\Component\Form\DataProvider"
+                      name="tokenbalance_form_data_source">
+            <settings>
+                <requestFieldName>token_balance_id</requestFieldName>
+                <primaryFieldName>token_balance_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="5">
+        <settings>
+            <label/>
+            <dataScope>general</dataScope>
+        </settings>
+        <field name="customer_id" formElement="input" sortOrder="10">
+            <settings>
+                <label translate="true">Customer ID</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="customer_email" formElement="input" sortOrder="20">
+            <settings>
+                <label translate="true">Customer Email</label>
+            </settings>
+        </field>
+        <field name="amount" formElement="input" sortOrder="30">
+            <settings>
+                <label translate="true">Amount (of tokens)</label>
+            </settings>
+        </field>
+    </fieldset>
+</form>

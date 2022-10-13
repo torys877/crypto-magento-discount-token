@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ihor Oleksiienko (https://github.com/torys877)
+ * See LICENSE for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="cryptom2_token_balance" resource="default" engine="innodb" comment="Discount Token Customer Balance">
+        <column xsi:type="int" name="token_balance_id" unsigned="true" nullable="false" identity="true"
+                comment="Token Balance Id"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" identity="false"
+                default="0" comment="Customer Id"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" comment="Customer Email"/>
+        <column xsi:type="int" name="amount" unsigned="false" nullable="false" default="0"
+                comment="Balance Amount"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="token_balance_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="TOKEN_BALANCE_CUSTOMER_ID_CUSTOMER_ENTITY_ID"
+                    table="cryptom2_token_balance" column="customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="NO ACTION"/>
+
+        <index referenceId="TOKEN_BALANCE_CUSTOMER_EMAIL" indexType="btree">
+            <column name="customer_email"/>
+        </index>
+    </table>
+
+    <table name="cryptom2_token_balance_history" resource="default" engine="innodb" comment="Discount Token Balance History">
+        <column xsi:type="int" name="token_history_id" unsigned="true" nullable="false" identity="true"
+                comment="History Id"/>
+        <column xsi:type="int" name="token_balance_id" unsigned="true" nullable="false" identity="false"
+                 comment="Token Balance Id"/>
+        <column xsi:type="smallint" name="action" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Action"/>
+        <column xsi:type="decimal" name="amount" scale="4" precision="20" unsigned="false" nullable="false"
+                default="0" comment="Balance Amount"/>
+        <column xsi:type="decimal" name="delta" scale="4" precision="20" unsigned="false" nullable="false"
+                default="0" comment="Balance Delta"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="true" comment="Updated At"/>
+        <column xsi:type="varchar" name="additional_info" nullable="true" length="255" comment="Additional Info"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="token_history_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="TOKEN_BALANCE_HISTORY_TO_TOKEN_BALANCE"
+                    table="cryptom2_token_balance_history" column="token_balance_id" referenceTable="cryptom2_token_balance"
+                    referenceColumn="token_balance_id" onDelete="CASCADE"/>
+        <index referenceId="TOKEN_BALANCE_ID_INDEX" indexType="btree">
+            <column name="token_balance_id"/>
+        </index>
+    </table>
+
+    <table name="cryptom2_token_order" resource="default" engine="innodb" comment="Magento Token Orders">
+        <column xsi:type="int" name="token_order_id" unsigned="true" nullable="false" identity="true"
+                comment="Token Order Id"/>
+        <column xsi:type="int" name="token_balance_id" unsigned="true" nullable="false" identity="false"
+                comment="Token Balance Id"/>
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="32" comment="Increment ID"/>
+        <column xsi:type="int" name="amount" unsigned="false" nullable="false" default="0"
+                comment="Balance Amount"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="token_order_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="TOKEN_ORDER_ID_TO_TOKEN_BALANCE_ID"
+                    table="cryptom2_token_order" column="token_balance_id" referenceTable="cryptom2_token_balance"
+                    referenceColumn="token_balance_id" onDelete="CASCADE"/>
+
+        <index referenceId="TOKEN_ORDER_INCREMENT_ID" indexType="btree">
+            <column name="increment_id"/>
+        </index>
+    </table>
+
+    <table name="cryptom2_token_withdraw_request" resource="default" engine="innodb" comment="Discount Token Withdraw Request">
+        <column xsi:type="int" name="request_id" unsigned="true" nullable="false" identity="true"
+                comment="Request Id"/>
+        <column xsi:type="int" name="token_balance_id" unsigned="true" nullable="false" identity="false"
+                 comment="Token Balance Id"/>
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Status"/>
+        <column xsi:type="int" name="amount" unsigned="false" nullable="false"
+                default="0" comment="Request Amount"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="true" comment="Updated At"/>
+        <column xsi:type="text" name="signed_message" nullable="true" comment="Signed Message (after approve send to customer to claim tokens)"/>
+        <column xsi:type="text" name="recipient_address" nullable="true" comment="Recipient Address (address of customer who wants to claim tokens)"/>
+        <column xsi:type="text" name="nonce" nullable="true" comment="Nonce for signing message"/>
+        <column xsi:type="text" name="message_hash" nullable="true" comment="Hash for unique message"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="request_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="TOKEN_WITHDRAW_REQUEST_KEY"
+                    table="cryptom2_token_withdraw_request" column="token_balance_id" referenceTable="cryptom2_token_balance"
+                    referenceColumn="token_balance_id" onDelete="CASCADE"/>
+        <index referenceId="TOKEN_BALANCE_ID_INDEX" indexType="btree">
+            <column name="token_balance_id"/>
+        </index>
+    </table>
+    <table name="quote" resource="checkout" comment="Sales Flat Quote">
+        <column xsi:type="int" name="used_magento_tokens" unsigned="false"
+                nullable="true" comment="Magento Token Balance used"/>
+
+        <column xsi:type="int" name="used_magento_tokens_base_value" unsigned="false"
+                nullable="true" comment="Used value converted from magento tokens"/>
+    </table>
+</schema>

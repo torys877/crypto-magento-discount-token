@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © Ihor Oleksiienko (https://github.com/torys877)
+ * See LICENSE for license details.
+ */
+
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
+/**
+ * @var SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php if ($block->getTotal()->getValue()): ?>
+    <?php
+    /** @var \Magento\Checkout\Helper\Data $checkoutHelper */
+    $checkoutHelper = $block->getData('checkoutHelper');
+    ?>
+    <tr class="totals balance">
+        <th colspan="<?= $block->escapeHtmlAttr($block->getColspan()) ?>" class="mark" scope="row">
+            <?= /* @noEscape */
+            $secureRenderer->renderTag(
+                'style',
+                [],
+                '.totals.balance th { ' . $block->escapeHtmlAttr($block->getTotal()->getStyle()) . ' }',
+                false
+            );
+            ?>
+            <?= $block->escapeHtml($block->getTotal()->getTitle()) ?>
+        </th>
+        <td class="amount"
+            data-th="<?= $block->escapeHtmlAttr($block->getTotal()->getTitle()) ?>">
+            <?= /* @noEscape */
+            $secureRenderer->renderTag(
+                'style',
+                [],
+                '.totals.balance td { ' . $block->escapeHtmlAttr($block->getTotal()->getStyle()) . ' }',
+                false
+            );
+            ?>
+            <span class="discount">
+                <?= /* @noEscape */ $checkoutHelper->formatPrice($block->getTotal()->getValue()) ?>
+            </span>
+        </td>
+    </tr>
+<?php endif; ?>

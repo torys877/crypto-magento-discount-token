@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ihor Oleksiienko (https://github.com/torys877)
+ * See LICENSE for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <cryptotoken>
+            <general>
+                <enable>0</enable>
+                <discount>5</discount>
+                <multiplier>100</multiplier>
+                <token_name>Magento Discount Token</token_name>
+                <token_symbol>MDC</token_symbol>
+            </general>
+        </cryptotoken>
+    </default>
+</config>

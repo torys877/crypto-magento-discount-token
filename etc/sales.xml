@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ihor Oleksiienko (https://github.com/torys877)
+ * See LICENSE for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="magentotoken" instance="Crypto\MagentoToken\Model\Total\Quote\TokenBalance" sort_order="950">
+                <renderer name="frontend" instance="Crypto\MagentoToken\Block\Checkout\Total"/>
+            </item>
+        </group>
+    </section>
+</config>

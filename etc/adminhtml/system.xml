@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ihor Oleksiienko (https://github.com/torys877)
+ * See LICENSE for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="crypto" translate="label" sortOrder="301">
+            <label>Crypto M2</label>
+        </tab>
+        <section id="cryptotoken" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Magento Discount Token</label>
+            <tab>crypto</tab>
+            <resource>Crypto_MagentoToken::crypto_token</resource>
+            <group id="general" translate="label" type="text" sortOrder="5" showInDefault="100" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label comment" sortOrder="100" type="select" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <comment>Enable Magento Token discount program</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="discount" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Percent Of Order Grand Total</label>
+                    <validate>required-number validate-number</validate>
+                </field>
+                <field id="multiplier" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Multiplier</label>
+                    <comment>Вetermine the token value will be multiply after order placing or divided for discount on checkout</comment>
+                    <validate>validate-number</validate>
+                </field>
+
+                <field id="token_symbol" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Token Symbol</label>
+                </field>
+                <field id="token_name" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Token Name</label>
+                </field>
+                <field id="token_address" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Token Address</label>
+                </field>
+                <field id="smart_contract_address" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <comment>Address Of Control Contract</comment>
+                    <label>Smart Contract Address</label>
+                </field>
+                <field id="smart_contract_abi" translate="label" type="textarea" sortOrder="400" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Smart Contract ABI</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

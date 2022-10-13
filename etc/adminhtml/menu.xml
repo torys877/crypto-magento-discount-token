@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ihor Oleksiienko (https://github.com/torys877)
+ * See LICENSE for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Crypto_MagentoToken::token"
+             title="Crypto Magento Discount Token"
+             module="Crypto_MagentoToken"
+             sortOrder="600"
+             resource="Crypto_MagentoToken::token"
+             parent="Magento_Backend::marketing"
+        />
+
+        <add id="Crypto_MagentoToken::token_balance"
+             title="Token Balances"
+             module="Crypto_MagentoToken"
+             action="cryptotoken/tokenbalance"
+             sortOrder="10"
+             resource="Crypto_MagentoToken::token_balance"
+             parent="Crypto_MagentoToken::token"/>
+
+        <add id="Crypto_MagentoToken::token_history"
+             title="Token History"
+             module="Crypto_MagentoToken"
+             action="cryptotoken/tokenhistory"
+             sortOrder="20"
+             resource="Crypto_MagentoToken::token_history"
+             parent="Crypto_MagentoToken::token"/>
+
+        <add id="Crypto_MagentoToken::token_order"
+             title="Token Orders"
+             module="Crypto_MagentoToken"
+             action="cryptotoken/tokenorder"
+             sortOrder="30"
+             resource="Crypto_MagentoToken::token_order"
+             parent="Crypto_MagentoToken::token"/>
+
+        <add id="Crypto_MagentoToken::withdraw_request"
+             title="Withdraw Requests"
+             module="Crypto_MagentoToken"
+             action="cryptotoken/withdrawrequest"
+             sortOrder="40"
+             resource="Crypto_MagentoToken::withdraw_request"
+             parent="Crypto_MagentoToken::token"/>
+    </menu>
+</config>

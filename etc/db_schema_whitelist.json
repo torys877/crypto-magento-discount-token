@@ -1,0 +1,72 @@
+{
+    "cryptom2_token_balance": {
+        "column": {
+            "token_balance_id": true,
+            "customer_id": true,
+            "customer_email": true,
+            "amount": true,
+            "base_currency_code": true
+        },
+        "index": {
+            "TOKEN_BALANCE_CUSTOMER_EMAIL": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "TOKEN_BALANCE_CUSTOMER_ID_CUSTOMER_ENTITY_ID": true
+        }
+    },
+    "cryptom2_token_balance_history": {
+        "column": {
+            "token_history_id": true,
+            "token_balance_id": true,
+            "action": true,
+            "amount": true,
+            "delta": true,
+            "updated_at": true,
+            "additional_info": true
+        },
+        "index": {
+            "TOKEN_BALANCE_ID_INDEX": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "TOKEN_BALANCE_HISTORY_TO_TOKEN_BALANCE": true
+        }
+    },
+    "cryptom2_token_order": {
+        "column": {
+            "token_order_id": true,
+            "token_balance_id": true,
+            "increment_id": true,
+            "amount": true
+        },
+        "index": {
+            "TOKEN_ORDER_INCREMENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "TOKEN_ORDER_ID_TO_TOKEN_BALANCE_ID": true
+        }
+    },
+    "cryptom2_token_withdraw_request": {
+        "column": {
+            "request_id": true,
+            "token_balance_id": true,
+            "status": true,
+            "amount": true,
+            "created_at": true,
+            "updated_at": true,
+            "signed_message": true,
+            "recipient_address": true,
+            "nonce": true,
+            "message_hash": true
+        },
+        "index": {
+            "TOKEN_BALANCE_ID_INDEX": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "TOKEN_WITHDRAW_REQUEST_KEY": true
+        }
+    }
+}
