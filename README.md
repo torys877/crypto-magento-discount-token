@@ -2,20 +2,6 @@
 
 Magento 2 module allows to use ERC20 tokens as discount
 
-## Table of contents
-
-* [Description](#description)
-* [Feature](#feature)
-* [Installation](#installation)
-  * [Composer Installation](#composer-installation)
-  * [Settings](#settings)
-    * [Live Settings](#live-settings)
-    * [Test Mode](#test-mode)
-    * [Display Eth Currency](#display-eth-currency)
-* [Screenshots](#screenshots)
-* [Author](#author)
-* [License](#license)
-
 ## Description
 
 Extension allows to collect and use tokens, similar to customer balance functional. Tokens are charged after order placement and customer can use this balance as discount for new orders.
