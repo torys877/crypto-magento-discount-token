@@ -1,6 +1,6 @@
 {
     "name": "cryptom2/magento-discount-token",
-    "version": "v1.0.0",
+    "version": "v1.0.1",
     "description": "Magento 2 ERC20 token discount extension",
     "type": "magento2-module",
     "authors": [
