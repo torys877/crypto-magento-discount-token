@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "cryptom2/base": ">=1.0.1"
+        "cryptom2/base": "^1.0.0"
     },
     "license": "MIT",
     "autoload": {
