@@ -28,7 +28,7 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="magentotoken_listing_data_source" xsi:type="string">
+                <item name="tokenbalance_listing_data_source" xsi:type="string">
                     Crypto\MagentoToken\Model\ResourceModel\Tokenbalance\Grid\Collection
                 </item>
             </argument>
