@@ -22,7 +22,7 @@ class Index extends Entity implements HttpGetActionInterface
         /** @var Page $resultPage */
         $resultPage = $this->resultFactory->create($this->resultFactory::TYPE_PAGE);
 
-        $resultPage->setActiveMenu('BigBusTours::citylanding');
+        $resultPage->setActiveMenu('Crypto_MagentoToken::token');
         $resultPage->getConfig()->getTitle()->prepend((string) __('Token Balances'));
 
         return $resultPage;

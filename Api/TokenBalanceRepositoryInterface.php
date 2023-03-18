@@ -43,7 +43,7 @@ interface TokenBalanceRepositoryInterface
     public function getByCustomerIdOrEmail(?string $customerId, ?string $customerEmail): ?TokenBalanceInterface;
 
     /**
-     * Save city landing
+     * Save token balance entity
      *
      * @param TokenBalanceInterface $tokenBalance
      * @return TokenBalanceInterface

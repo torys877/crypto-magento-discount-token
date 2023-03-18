@@ -37,7 +37,7 @@ interface TokenOrderRepositoryInterface
     public function getByIncrementId(string $incrementId): TokenOrderInterface;
 
     /**
-     * Save city landing
+     * Save token order entity
      *
      * @param TokenOrderInterface $tokenOrder
      * @return TokenOrderInterface

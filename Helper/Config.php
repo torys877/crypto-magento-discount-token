@@ -7,8 +7,6 @@ declare(strict_types=1);
 
 namespace Crypto\MagentoToken\Helper;
 
-use Crypto\MagentoToken\Api\Data\CityLandingSearchResultsInterface;
-use Crypto\MagentoToken\Model\CityLandingRepository;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;

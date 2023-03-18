@@ -23,7 +23,7 @@ interface WithdrawRequestRepositoryInterface
     public function getById(int $requestId): WithdrawRequestInterface;
 
     /**
-     * Save city landing
+     * Save withdtaw request entity
      *
      * @param WithdrawRequestInterface $withdrawRequest
      * @return WithdrawRequestInterface

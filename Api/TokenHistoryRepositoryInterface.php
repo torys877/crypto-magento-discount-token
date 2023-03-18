@@ -30,7 +30,7 @@ interface TokenHistoryRepositoryInterface
     public function getByTokenBalanceId(int $tokenBalanceId): TokenBalanceHistoryInterface;
 
     /**
-     * Save city landing
+     * Save token history entity
      *
      * @param TokenBalanceHistoryInterface $tokenHistory
      * @return TokenBalanceHistoryInterface
